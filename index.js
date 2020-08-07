@@ -2,29 +2,28 @@
 
 'use strict';
 
-const {resolve} = require('path');
-const {readJson} = require('fs-extra');
-const {save, saveAll} = require('dev-blog-directory-save');
+const { resolve } = require('path');
+const { readJson } = require('fs-extra');
+const { save, saveAll } = require('dev-blog-directory-save');
 
 function main(filepath, options) {
-  return readJson(filepath)
-    .then(docs => {
-      if (!docs) {
-        return;
-      }
+  return readJson(filepath).then((docs) => {
+    if (!docs) {
+      return;
+    }
 
-      if (Array.isArray(docs)) {
-        docs = docs.filter(doc => doc && typeof doc === 'object');
-        return saveAll(docs, options);
-      }
+    if (Array.isArray(docs)) {
+      docs = docs.filter((doc) => doc && typeof doc === 'object');
+      return saveAll(docs, options);
+    }
 
-      return save(docs, options);
-    });
+    return save(docs, options);
+  });
 }
 
-function exit(msg) {
-  if (msg) {
-    console.error('\n' + msg);
+function exit(message) {
+  if (message) {
+    console.error('\n' + message);
 
     process.exit(1);
   }
@@ -32,10 +31,13 @@ function exit(msg) {
   process.exit(0);
 }
 
-if (require.main === module) { // Called directly
-  const argv = require('minimist')(process.argv.slice(2), {boolean: ['merge']});
+if (require.main === module) {
+  // Called directly
+  const argv = require('minimist')(process.argv.slice(2), {
+    boolean: ['merge']
+  });
   const filename = argv._[0];
-  const option = {merge: Boolean(argv.merge)};
+  const option = { merge: Boolean(argv.merge) };
   if (!filename) {
     exit('Usage: save-blog-json [--merge] JSONFILE');
   }
@@ -49,6 +51,7 @@ if (require.main === module) { // Called directly
       console.log('Done!');
     })
     .catch(exit);
-} else { // Required as a module
+} else {
+  // Required as a module
   module.exports = main;
 }
