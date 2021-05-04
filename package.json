@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "dev-blog-directory-save": "^0.4.6",
-    "fs-extra": "^9.0.1",
+    "fs-extra": "^10.0.0",
     "minimist": "^1.2.0"
   },
   "devDependencies": {
