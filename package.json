@@ -28,7 +28,7 @@
     "nyc": "^15.1.0",
     "prettier": "latest",
     "unlink-self": "latest",
-    "xo": "^0.32.1"
+    "xo": "^0.41.0"
   },
   "keywords": [
     "save",
